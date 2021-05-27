@@ -24,9 +24,11 @@ namespace Messenger_Analyzer
     public partial class MainWindow : Window
     {
         public Chat MainChat { get; set; }
+        MainLogic logic;
         public MainWindow()
         {
             InitializeComponent();
+            this.logic = new MainLogic();
         }
 
         private void LoadFile(object sender, RoutedEventArgs e)
@@ -46,57 +48,28 @@ namespace Messenger_Analyzer
                 {
                     filenames.Add(item);
                 }
+
                 FileHandler fh = new FileHandler(filenames);
 
                 if (fh.Chats.Count == 1)
                 {
                     this.MainChat = fh.Chats[0];
-                    this.Refresh();
                 }
-                else if (this.CanChatsBeCombined(fh.Chats))
+                else if (this.logic.CanChatsBeCombined(fh.Chats))
                 {
-                    this.MainChat = this.CombineChats(fh.Chats);
-                    this.Refresh();
+                    this.MainChat = this.logic.CombineChats(fh.Chats);
                 }
                 else
                 {
                     MessageBox.Show("Error! Dont load different people/groups' messages!");
                 }
+
+                this.MainChat.participants = this.logic.MessagesToParticipants(this.MainChat.messages, this.MainChat.participants);
+                this.Refresh();
             }
         }
 
-        private bool CanChatsBeCombined(List<Chat> chats)
-        {
-            if (chats.Count == 1)
-                return true;
-
-            bool canBeCombined = true;
-            string oneTitle = chats[0].title;
-
-            foreach (Chat item in chats)
-                if (item.title != oneTitle)
-                    canBeCombined = false;
-
-            return canBeCombined;
-        }
-
-        private Chat CombineChats(List<Chat> chats)
-        {
-            Chat outp = new Chat();
-            outp.title = chats[0].title;
-            outp.participants = chats[0].participants;
-            outp.thread_path = chats[0].thread_path;
-            outp.thread_type = chats[0].thread_type;
-            outp.participants = chats[0].participants;
-            outp.messages = new List<Message>();
-
-            foreach (Chat item in chats)
-            {
-                outp.messages.AddRange(item.messages);
-            }
-
-            return outp;
-        }
+        
 
         private void Refresh_DGrid(object sender, RoutedEventArgs e)
         {
