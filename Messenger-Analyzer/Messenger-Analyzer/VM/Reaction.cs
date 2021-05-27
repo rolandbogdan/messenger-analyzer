@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messenger_Analyzer.VM
 {
-    class Reaction
+    public class Reaction
     {
         public string reaction { get; set; }
         public string actor { get; set; }

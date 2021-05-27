@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messenger_Analyzer.VM
 {
-    class Video
+    public class Video
     {
         public string uri { get; set; }
         public int creation_timestamp { get; set; }

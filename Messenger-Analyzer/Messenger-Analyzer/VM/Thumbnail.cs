@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messenger_Analyzer.VM
 {
-    class Thumbnail
+    public class Thumbnail
     {
         public string uri { get; set; }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messenger_Analyzer.VM
 {
-    class Message
+    public class Message
     {
         public string sender_name { get; set; }
         public object timestamp_ms { get; set; }

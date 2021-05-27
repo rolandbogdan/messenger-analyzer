@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messenger_Analyzer.VM
 {
-    class Participant
+    public class Participant
     {
         public string name { get; set; }
 
