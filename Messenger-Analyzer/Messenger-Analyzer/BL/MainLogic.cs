@@ -59,5 +59,24 @@ namespace Messenger_Analyzer.BL
 
             return outp;
         }
+
+        public List<Participant> FilteredWordCounter(List<Participant> p, string msg)
+        {
+            foreach (Participant item in p)
+            {
+                foreach (Message message in item.Messages)
+                {
+                    if (message.content != null)
+                    {
+                        if (message.content.ToLower().Contains(msg.ToLower()))
+                        {
+                            item.FilteredWordCount++;
+                        }
+                    }
+                }
+            }
+
+            return p;
+        }
     }
 }

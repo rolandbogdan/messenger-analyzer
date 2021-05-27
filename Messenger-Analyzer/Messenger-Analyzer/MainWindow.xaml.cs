@@ -87,5 +87,16 @@ namespace Messenger_Analyzer
             }
 
         }
+
+        private void Filter_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainLogic ml = new MainLogic();
+            SmallDgrid.ItemsSource = null;
+            if (this.MainChat != null && this.MainChat.participants != null && filterBox.Text != string.Empty)
+            {
+                this.MainChat.participants = ml.FilteredWordCounter(MainChat.participants, filterBox.Text);
+                SmallDgrid.ItemsSource = this.MainChat.participants;
+            }
+        }
     }
 }

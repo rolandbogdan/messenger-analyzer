@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Messenger_Analyzer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="1000">
+        Title="MainWindow" Height="820" Width="1000">
     <Grid>
         <Button Content="Choose a file" HorizontalAlignment="Left" Margin="19,20,0,0" VerticalAlignment="Top" Height="22" Width="135" Click="LoadFile"/>
         <Button Content="Refresh" HorizontalAlignment="Left" Margin="187,20,0,0" VerticalAlignment="Top" Height="22" Width="50" Click="Refresh_DGrid"/>
         <DataGrid x:Name="DGrid" IsReadOnly="True" HorizontalAlignment="Left"
-                  Height="471" Margin="10,67,0,0" VerticalAlignment="Top" Width="832"
+                  Height="445" Margin="10,67,0,0" VerticalAlignment="Top" Width="832"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=name}"/>
@@ -23,5 +23,16 @@
         <Label Content="Összes üzenetek száma" HorizontalAlignment="Left" Margin="558,18,0,0" VerticalAlignment="Top"/>
         <Label x:Name="nameLabel" Content="" HorizontalAlignment="Left" Margin="343,18,0,0" VerticalAlignment="Top"/>
         <Label x:Name="allMessageCount" Content="" HorizontalAlignment="Left" Margin="697,18,0,0" VerticalAlignment="Top"/>
+        <Label Content="Filter by word" HorizontalAlignment="Left" Margin="10,532,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="filterBox" HorizontalAlignment="Left" Margin="98,536,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Filter" HorizontalAlignment="Left" Margin="223,536,0,0" VerticalAlignment="Top" Click="Filter_ButtonClick"/>
+        <DataGrid x:Name="SmallDgrid" IsReadOnly="True" HorizontalAlignment="Left"
+                  Height="203" Margin="10,563,0,0" VerticalAlignment="Top" Width="599"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=name}"/>
+                <DataGridTextColumn Header="Number of messages sent with the filtered word" Binding="{Binding Path=FilteredWordCount}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

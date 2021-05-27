@@ -38,6 +38,8 @@ namespace Messenger_Analyzer.VM
             get { return this.Messages.Count; }
         }
 
+        public int FilteredWordCount { get; set; }
+
         public string name { get; set; }
 
         public List<Message> Messages { get; set; }
