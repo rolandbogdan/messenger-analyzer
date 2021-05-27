@@ -3,6 +3,7 @@ using Messenger_Analyzer.VM;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,8 +70,6 @@ namespace Messenger_Analyzer
             }
         }
 
-        
-
         private void Refresh_DGrid(object sender, RoutedEventArgs e)
         {
             this.Refresh();
@@ -79,6 +78,7 @@ namespace Messenger_Analyzer
         private void Refresh()
         {
             DGrid.ItemsSource = null;
+            SmallDgrid.ItemsSource = null;
             if (this.MainChat != null && this.MainChat.participants != null)
             {
                 DGrid.ItemsSource = this.MainChat.participants;
@@ -94,8 +94,45 @@ namespace Messenger_Analyzer
             SmallDgrid.ItemsSource = null;
             if (this.MainChat != null && this.MainChat.participants != null && filterBox.Text != string.Empty)
             {
+                foreach (Participant participant in MainChat.participants)
+                {
+                    participant.FilteredWordCount = 0;
+                }
                 this.MainChat.participants = ml.FilteredWordCounter(MainChat.participants, filterBox.Text);
                 SmallDgrid.ItemsSource = this.MainChat.participants;
+            }
+        }
+
+        private void Export_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (DGrid.SelectedItem != null)
+            {
+                FileHandler.ExportAllMessages(
+                    (DGrid.SelectedItem as Participant).Messages,
+                    (DGrid.SelectedItem as Participant).name);
+                MessageBox.Show("Export ok");
+            }
+            else
+            {
+                MessageBox.Show("Export wasnt ok");
+            }
+        }
+
+        private void ExportMostFrequent_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (DGrid.SelectedItem != null)
+            {
+                FileHandler.ExportMostFrequentWords(
+                    this.logic.MostFrequentWords(
+                        logic.GetAllWords(
+                            (DGrid.SelectedItem as Participant))),
+                    (DGrid.SelectedItem as Participant).name);
+
+                MessageBox.Show("Export ok");
+            }
+            else
+            {
+                MessageBox.Show("Export wasnt ok");
             }
         }
     }
