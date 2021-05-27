@@ -80,7 +80,12 @@ namespace Messenger_Analyzer
         {
             DGrid.ItemsSource = null;
             if (this.MainChat != null && this.MainChat.participants != null)
+            {
                 DGrid.ItemsSource = this.MainChat.participants;
+                allMessageCount.Content = this.MainChat.messages.Count;
+                nameLabel.Content = this.MainChat.title;
+            }
+
         }
     }
 }

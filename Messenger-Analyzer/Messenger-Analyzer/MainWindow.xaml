@@ -19,5 +19,9 @@
                 <DataGridTextColumn Header="Average reaction / message" Binding="{Binding Path=ReactionsPerMessage}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Chat neve:" HorizontalAlignment="Left" Margin="273,18,0,0" VerticalAlignment="Top"/>
+        <Label Content="Összes üzenetek száma" HorizontalAlignment="Left" Margin="558,18,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="nameLabel" Content="" HorizontalAlignment="Left" Margin="343,18,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="allMessageCount" Content="" HorizontalAlignment="Left" Margin="697,18,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
