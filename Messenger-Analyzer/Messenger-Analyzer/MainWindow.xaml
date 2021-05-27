@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Button Content="Choose a file" HorizontalAlignment="Left" Margin="19,20,0,0" VerticalAlignment="Top" Height="22" Width="135" Click="LoadFile"/>
 
     </Grid>
 </Window>

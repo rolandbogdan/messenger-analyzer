@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Messenger_Analyzer.BL;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,21 @@ namespace Messenger_Analyzer
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void LoadFile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.DefaultExt = ".json";
+            dlg.Filter = "Json File (*.json)|*.json";
+            dlg.FileName = "*.json";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                FileHandler fh = new FileHandler(dlg.FileName);
+            }
         }
     }
 }
