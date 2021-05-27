@@ -12,10 +12,27 @@ namespace Messenger_Analyzer.BL
     class FileHandler
     {
         public List<Chat> Chats { get; set; }
-        public FileHandler(List<string> filepaths)
+        public FileHandler(IEnumerable<string> filepaths)
         {
             this.Chats = new List<Chat>();
             this.ProcessMultiple(filepaths);
+        }
+
+        public static void ExportMostFrequentWords(IEnumerable<Word> words, string path)
+        {
+            File.WriteAllText(
+                path.EndsWith(".json") ? path : string.Format(path + ".json"),
+                JsonConvert.SerializeObject(words, Formatting.Indented));
+        }
+
+        public static void ExportAllMessages(IEnumerable<Message> messages, string path)
+        {
+            StreamWriter sw = new StreamWriter(path.EndsWith(".txt") ? path : string.Format(path + ".txt"));
+            foreach (Message item in messages)
+            {
+                sw.WriteLine(item);
+            }
+            sw.Close();
         }
 
         private void ProcessOne(string path)
@@ -28,7 +45,7 @@ namespace Messenger_Analyzer.BL
             this.Chats.Add(content);
         }
 
-        private void ProcessMultiple(List<string> paths)
+        private void ProcessMultiple(IEnumerable<string> paths)
         {
             foreach (string item in paths)
             {
@@ -58,5 +75,6 @@ namespace Messenger_Analyzer.BL
                 .Replace(@"\u00c5\u00b0", "Ű")
                 .Replace(@"\u00c3\u00a4", "ä");
         }
+
     }
 }
