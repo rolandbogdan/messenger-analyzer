@@ -20,9 +20,7 @@ namespace Messenger_Analyzer.BL
 
         private void ProcessOne(string path)
         {
-            StreamReader sr = new StreamReader(path, Encoding.UTF8);
-            string json = sr.ReadToEnd();
-            sr.Close();
+            string json = File.ReadAllText(path);
 
             // this.FixString(ref json);
 
