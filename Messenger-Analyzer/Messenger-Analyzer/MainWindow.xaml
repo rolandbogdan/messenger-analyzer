@@ -27,7 +27,7 @@
         <TextBox x:Name="filterBox" HorizontalAlignment="Left" Margin="98,536,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button Content="Filter" HorizontalAlignment="Left" Margin="223,536,0,0" VerticalAlignment="Top" Click="Filter_ButtonClick"/>
         <DataGrid x:Name="SmallDgrid" IsReadOnly="True" HorizontalAlignment="Left"
-                  Height="203" Margin="10,563,0,0" VerticalAlignment="Top" Width="599"
+                  Height="203" Margin="10,563,0,0" VerticalAlignment="Top" Width="310"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=name}"/>
@@ -35,5 +35,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Export selected participant's message history" HorizontalAlignment="Left" Margin="588,521,0,0" VerticalAlignment="Top" Click="Export_ButtonClick" Height="25" Width="256"/>
+        <Button Content="Export most frequent words of participant" HorizontalAlignment="Left" Margin="588,563,0,0" VerticalAlignment="Top" Height="25" Width="256" Click="ExportMostFrequent_ButtonClick"/>
     </Grid>
 </Window>

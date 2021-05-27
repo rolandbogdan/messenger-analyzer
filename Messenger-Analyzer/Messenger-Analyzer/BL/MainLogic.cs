@@ -78,5 +78,40 @@ namespace Messenger_Analyzer.BL
 
             return p;
         }
+
+        public List<string> GetAllWords(Participant p)
+        {
+            List<string> output = new List<string>();
+            foreach (Message message in p.Messages)
+            {
+                if (message.content != null)
+                {
+                    output.AddRange(message.content.Split(' ').ToList());
+                }
+            }
+            return output;
+        }
+
+        public List<Word> MostFrequentWords(List<string> words)
+        {
+            List<Word> allWords = new List<Word>();
+            List<string> uniqueWords = new List<string>();
+
+            foreach (string item in words)
+            {
+                if (!uniqueWords.Contains(item))
+                {
+                    uniqueWords.Add(item);
+                    allWords.Add(new Word(item));
+                }
+                else
+                {
+                    allWords.FirstOrDefault(x => x.content == item).occurrence++;
+                }
+            }
+
+            allWords.Sort();
+            return allWords;
+        }
     }
 }

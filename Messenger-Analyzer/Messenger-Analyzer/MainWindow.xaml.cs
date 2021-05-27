@@ -70,8 +70,6 @@ namespace Messenger_Analyzer
             }
         }
 
-        
-
         private void Refresh_DGrid(object sender, RoutedEventArgs e)
         {
             this.Refresh();
@@ -80,6 +78,7 @@ namespace Messenger_Analyzer
         private void Refresh()
         {
             DGrid.ItemsSource = null;
+            SmallDgrid.ItemsSource = null;
             if (this.MainChat != null && this.MainChat.participants != null)
             {
                 DGrid.ItemsSource = this.MainChat.participants;
@@ -108,12 +107,27 @@ namespace Messenger_Analyzer
         {
             if (DGrid.SelectedItem != null)
             {
-                StreamWriter sw = new StreamWriter((DGrid.SelectedItem as Participant).name + ".txt");
-                foreach (Message msg in (DGrid.SelectedItem as Participant).Messages)
-                {
-                    sw.WriteLine(msg.content);
-                }
-                sw.Close();
+                FileHandler.ExportAllMessages(
+                    (DGrid.SelectedItem as Participant).Messages,
+                    (DGrid.SelectedItem as Participant).name);
+                MessageBox.Show("Export ok");
+            }
+            else
+            {
+                MessageBox.Show("Export wasnt ok");
+            }
+        }
+
+        private void ExportMostFrequent_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (DGrid.SelectedItem != null)
+            {
+                FileHandler.ExportMostFrequentWords(
+                    this.logic.MostFrequentWords(
+                        logic.GetAllWords(
+                            (DGrid.SelectedItem as Participant))),
+                    (DGrid.SelectedItem as Participant).name);
+
                 MessageBox.Show("Export ok");
             }
             else
