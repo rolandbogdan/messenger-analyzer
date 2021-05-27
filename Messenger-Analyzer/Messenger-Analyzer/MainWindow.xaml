@@ -34,5 +34,6 @@
                 <DataGridTextColumn Header="Number of messages sent with the filtered word" Binding="{Binding Path=FilteredWordCount}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Export selected participant's message history" HorizontalAlignment="Left" Margin="588,521,0,0" VerticalAlignment="Top" Click="Export_ButtonClick" Height="25" Width="256"/>
     </Grid>
 </Window>

@@ -3,6 +3,7 @@ using Messenger_Analyzer.VM;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,8 +95,30 @@ namespace Messenger_Analyzer
             SmallDgrid.ItemsSource = null;
             if (this.MainChat != null && this.MainChat.participants != null && filterBox.Text != string.Empty)
             {
+                foreach (Participant participant in MainChat.participants)
+                {
+                    participant.FilteredWordCount = 0;
+                }
                 this.MainChat.participants = ml.FilteredWordCounter(MainChat.participants, filterBox.Text);
                 SmallDgrid.ItemsSource = this.MainChat.participants;
+            }
+        }
+
+        private void Export_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (DGrid.SelectedItem != null)
+            {
+                StreamWriter sw = new StreamWriter((DGrid.SelectedItem as Participant).name + ".txt");
+                foreach (Message msg in (DGrid.SelectedItem as Participant).Messages)
+                {
+                    sw.WriteLine(msg.content);
+                }
+                sw.Close();
+                MessageBox.Show("Export ok");
+            }
+            else
+            {
+                MessageBox.Show("Export wasnt ok");
             }
         }
     }

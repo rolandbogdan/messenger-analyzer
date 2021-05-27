@@ -20,7 +20,7 @@ namespace Messenger_Analyzer.BL
 
         private void ProcessOne(string path)
         {
-            string json = File.ReadAllText(path);
+            string json = File.ReadAllText(path, Encoding.UTF8);
 
             this.FixString(ref json);
 
@@ -38,27 +38,25 @@ namespace Messenger_Analyzer.BL
         
         private void FixString(ref string x)
         {
-            x.Replace("\u00c3\u00a1", "á");
-            x.Replace("\u00c3\u00a9", "é");
-            x.Replace("\u00c3\u00ad", "í");
-            x.Replace("\u00c3\u00b3", "ó");
-            x.Replace("\u00c3\u00b6", "ö");
-            x.Replace("\u00c5\u0091", "ő");
-            x.Replace("\u00c3\u00ba", "ú");
-            x.Replace("\u00c3\u00bc", "ü");
-            x.Replace("\u00c5\u00b1", "ű");
-
-            x.Replace("\u00c3\u0081", "Á");
-            x.Replace("\u00c3\u0089", "É");
-            x.Replace("\u00c3\u008d", "Í");
-            x.Replace("\u00c3\u0093", "Ó");
-            x.Replace("\u00c3\u0096", "Ö");
-            x.Replace("\u00c5\u0090", "Ő");
-            x.Replace("\u00c3\u009a", "Ú");
-            x.Replace("\u00c3\u009c", "Ü");
-            x.Replace("\u00c5\u00b0", "Ű");
-
-            x.Replace("\u00c3\u00a4", "ä");
+            x = x.Replace(@"\u00c3\u00a1", "á")
+                .Replace(@"\u00c3\u00a9", "é")
+                .Replace(@"\u00c3\u00ad", "í")
+                .Replace(@"\u00c3\u00b3", "ó")
+                .Replace(@"\u00c3\u00b6", "ö")
+                .Replace(@"\u00c5\u0091", "ő")
+                .Replace(@"\u00c3\u00ba", "ú")
+                .Replace(@"\u00c3\u00bc", "ü")
+                .Replace(@"\u00c5\u00b1", "ű")
+                .Replace(@"\u00c3\u0081", "Á")
+                .Replace(@"\u00c3\u0089", "É")
+                .Replace(@"\u00c3\u008d", "Í")
+                .Replace(@"\u00c3\u0093", "Ó")
+                .Replace(@"\u00c3\u0096", "Ö")
+                .Replace(@"\u00c5\u0090", "Ő")
+                .Replace(@"\u00c3\u009a", "Ú")
+                .Replace(@"\u00c3\u009c", "Ü")
+                .Replace(@"\u00c5\u00b0", "Ű")
+                .Replace(@"\u00c3\u00a4", "ä");
         }
     }
 }
