@@ -51,10 +51,12 @@ namespace Messenger_Analyzer
                 if (fh.Chats.Count == 1)
                 {
                     this.MainChat = fh.Chats[0];
+                    this.Refresh();
                 }
                 else if (this.CanChatsBeCombined(fh.Chats))
                 {
                     this.MainChat = this.CombineChats(fh.Chats);
+                    this.Refresh();
                 }
                 else
                 {
@@ -94,6 +96,18 @@ namespace Messenger_Analyzer
             }
 
             return outp;
+        }
+
+        private void Refresh_DGrid(object sender, RoutedEventArgs e)
+        {
+            this.Refresh();
+        }
+
+        private void Refresh()
+        {
+            DGrid.ItemsSource = null;
+            if (this.MainChat != null && this.MainChat.participants != null)
+                DGrid.ItemsSource = this.MainChat.participants;
         }
     }
 }
